@@ -3,6 +3,7 @@
         xmlns:vm="using:ROSBox.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:AvaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="ROSBox.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -15,6 +16,51 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+    
+    
+    <DockPanel LastChildFill="True">
+        <Border Height="25" Background="SkyBlue" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top">
+            <DockPanel>
+                <Menu DockPanel.Dock="Top">
+                    <MenuItem Header="_File">
+                        <MenuItem Header="_Open..."/>
+                        <Separator/>
+                        <MenuItem Header="_Exit"/>
+                    </MenuItem>
+                    <MenuItem Header="_Edit">
+                        <MenuItem Header="Copy"/>
+                        <MenuItem Header="Paste"/>
+                    </MenuItem>
+                </Menu>
+                <TextBlock/>
+            </DockPanel>
+        </Border>
+        
+        <Border Height="25" Background="SkyBlue" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top">
+            <TextBlock Foreground="Black">place quick ros commands here</TextBlock>
+        </Border>
+        
+        <Border Height="25" Background="LemonChiffon" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Bottom">
+            <TextBlock Foreground="Black">place text and icon indicators here</TextBlock>
+        </Border>
+        
+        <Border Width="200" Background="PaleGreen" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Left">
+            <TreeView ItemsSource="{Binding Nodes}">
+                <TreeView.ItemTemplate>
+                    <TreeDataTemplate ItemsSource="{Binding SubNodes}">
+                        <TextBlock Text="{Binding Title}"/>
+                    </TreeDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </Border>
+        
+        <Border Background="WhiteSmoke" BorderBrush="Black" BorderThickness="1">
+        <AvaloniaEdit:TextEditor Text="Hello AvaloniaEdit!"
+                                 ShowLineNumbers="True"
+                                 FontFamily="Cascadia Code,Consolas,Menlo,Monospace"/>
+        </Border>
+        
+    </DockPanel>
+    
+    
 </Window>

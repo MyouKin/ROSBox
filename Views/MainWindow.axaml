@@ -3,6 +3,7 @@
         xmlns:vm="using:ROSBox.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:AvaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="ROSBox.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -14,7 +15,54 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+    
+    <DockPanel LastChildFill="True">
+        <Border Height="25" Background="SkyBlue" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top">
+            <WrapPanel>
+                <Menu DockPanel.Dock="Top">
+                    <MenuItem Header="_File">
+                        <MenuItem Header="_Open..."/>
+                        <Separator/>
+                        <MenuItem Header="_Exit"/>
+                    </MenuItem>
+                    <MenuItem Header="_Edit">
+                        <MenuItem Header="Copy"/>
+                        <MenuItem Header="Paste"/>
+                    </MenuItem>
+                </Menu>
+            </WrapPanel>
+        </Border>
+        
+        <Border Height="25" Background="SkyBlue" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top">
+            <TextBlock Foreground="Black">Quick Commands</TextBlock>
+        </Border>
+        
+        <Border Height="25" Background="LemonChiffon" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Bottom">
+            <TextBlock Foreground="Black">Status Indicators</TextBlock>
+        </Border>
+        
+        <Border Width="200" Background="PaleGreen" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Left">
+            <!-- <TextBlock Foreground="Black">Dock = "Left"</TextBlock> -->
+            <!-- <TreeView Items="{Binding FolderItems}"> -->
+            <!--     <TreeView.ItemTemplate> -->
+            <!--         <TreeDataTemplate ItemsSource="{Binding SubNodes}"> -->
+            <!--             <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center"> -->
+            <!--                 <TextBlock Text="{Binding NodeName}"/> -->
+            <!--                 <TextBlock>[子目录:</TextBlock> -->
+            <!--                 <TextBlock Text="{Binding FolderNum}"></TextBlock> -->
+            <!--                 <TextBlock>,文件:</TextBlock> -->
+            <!--                 <TextBlock Text="{Binding FileNum}"></TextBlock> -->
+            <!--                 <TextBlock>]</TextBlock> -->
+            <!--             </WrapPanel> -->
+            <!--         </TreeDataTemplate> -->
+            <!--     </TreeView.ItemTemplate> -->
+            <!-- </TreeView> -->
+        </Border>
+        
+        <Border Background="White" BorderBrush="Black" BorderThickness="1">
+            <AvaloniaEdit:TextEditor Text="Text Editor"
+                                     ShowLineNumbers="True"
+                                     FontFamily="Cascadia Code,Consolas,Menlo,Monospace"/>
+        </Border>
+    </DockPanel>
 </Window>

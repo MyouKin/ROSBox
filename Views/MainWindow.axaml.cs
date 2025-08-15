@@ -1,11 +1,14 @@
 using Avalonia.Controls;
+using ROSBox.ViewModels;
 
-namespace ROSBox.Views;
-
-public partial class MainWindow : Window
+namespace ROSBox.Views
 {
-    public MainWindow()
+    public partial class MainWindow : Window
     {
-        InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
+            DataContext = new MainViewModel();
+        }
     }
 }

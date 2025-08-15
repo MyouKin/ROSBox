@@ -4,16 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:AvaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
+        xmlns:models="clr-namespace:ROSBox.Models"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="ROSBox.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
+        x:DataType="vm:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="ROSBox">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
+        <vm:MainViewModel/>
     </Design.DataContext>
     
     <DockPanel LastChildFill="True">
@@ -21,7 +22,7 @@
             <WrapPanel>
                 <Menu DockPanel.Dock="Top">
                     <MenuItem Header="_File">
-                        <MenuItem Header="_Open..."/>
+                        <MenuItem Header="_Open..." Command="{Binding SearchFolder}"/>
                         <Separator/>
                         <MenuItem Header="_Exit"/>
                     </MenuItem>
@@ -41,28 +42,33 @@
             <TextBlock Foreground="Black">Status Indicators</TextBlock>
         </Border>
         
-        <Border Width="200" Background="PaleGreen" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Left">
-            <!-- <TextBlock Foreground="Black">Dock = "Left"</TextBlock> -->
-            <!-- <TreeView Items="{Binding FolderItems}"> -->
-            <!--     <TreeView.ItemTemplate> -->
-            <!--         <TreeDataTemplate ItemsSource="{Binding SubNodes}"> -->
-            <!--             <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center"> -->
-            <!--                 <TextBlock Text="{Binding NodeName}"/> -->
-            <!--                 <TextBlock>[子目录:</TextBlock> -->
-            <!--                 <TextBlock Text="{Binding FolderNum}"></TextBlock> -->
-            <!--                 <TextBlock>,文件:</TextBlock> -->
-            <!--                 <TextBlock Text="{Binding FileNum}"></TextBlock> -->
-            <!--                 <TextBlock>]</TextBlock> -->
-            <!--             </WrapPanel> -->
-            <!--         </TreeDataTemplate> -->
-            <!--     </TreeView.ItemTemplate> -->
-            <!-- </TreeView> -->
+        <Border Width="200" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Left">
+            <DockPanel Margin="10">
+                <!-- 仅新增：一个按钮 -->
+                <Button DockPanel.Dock="Top" Content="选择文件夹"
+                        HorizontalAlignment="Left" Margin="0 0 0 10"
+                        Command="{Binding SearchFolder}"/>
+
+                <!-- 原文一模一样的 TreeView -->
+                <TreeView ItemsSource="{Binding FolderItems}">
+                    <TreeView.ItemTemplate>
+                        <TreeDataTemplate ItemsSource="{Binding Children}"
+                                          x:DataType="models:DirectoryTreeNode">
+                            <WrapPanel>
+                                <TextBlock Text="{Binding NodeName}"/>
+                                <TextBlock>[子目录:</TextBlock>
+                                <TextBlock Text="{Binding FolderNum}"/>
+                                <TextBlock>,文件:</TextBlock>
+                                <TextBlock Text="{Binding FileNum}"/>
+                                <TextBlock>]</TextBlock>
+                            </WrapPanel>
+                        </TreeDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </DockPanel>
         </Border>
         
         <Border Background="White" BorderBrush="Black" BorderThickness="1">
-            <AvaloniaEdit:TextEditor Text="Text Editor"
-                                     ShowLineNumbers="True"
-                                     FontFamily="Cascadia Code,Consolas,Menlo,Monospace"/>
         </Border>
     </DockPanel>
 </Window>

@@ -18,4 +18,10 @@
         <StyleInclude Source="avares://Semi.Avalonia.TreeDataGrid/Index.axaml" />
         <StyleInclude Source="avares://AvaloniaEdit/Themes/Fluent/AvaloniaEdit.xaml" />
     </Application.Styles>
+             
+     <Application.Resources>
+         <FontFamily x:Key="HarmonyOS_Sans">avares://ROSBox/Assets/Fonts/HarmonyOS_Sans#HarmonyOS Sans</FontFamily>
+         <FontFamily x:Key="Intel_One_Mono">avares://ROSBox/Assets/Fonts/intelonemono#Intel One Mono</FontFamily>
+     </Application.Resources>
+             
 </Application>

@@ -11,7 +11,7 @@
     </Application.DataTemplates>
   
     <Application.Styles>
-        <!-- <semi:SemiTheme/> -->
+        <semi:SemiTheme/>
         <FluentTheme />
         <StyleInclude Source="avares://Semi.Avalonia.ColorPicker/Index.axaml" />
         <StyleInclude Source="avares://Semi.Avalonia.DataGrid/Index.axaml" />

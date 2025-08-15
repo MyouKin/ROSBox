@@ -18,57 +18,72 @@
     </Design.DataContext>
     
     <DockPanel LastChildFill="True">
-        <Border Height="25" Background="SkyBlue" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top">
+        <DockPanel
+            Dock="Top">
             <WrapPanel>
                 <Menu DockPanel.Dock="Top">
-                    <MenuItem Header="_File">
-                        <MenuItem Header="_Open..." Command="{Binding SearchFolder}"/>
+                    <MenuItem Header="File">
+                        <MenuItem Header="Open" Command="{Binding SearchFolder}"/>
                         <Separator/>
-                        <MenuItem Header="_Exit"/>
+                        <MenuItem Header="Exit"/>
                     </MenuItem>
-                    <MenuItem Header="_Edit">
+                    <MenuItem Header="Edit">
                         <MenuItem Header="Copy"/>
                         <MenuItem Header="Paste"/>
                     </MenuItem>
                 </Menu>
             </WrapPanel>
-        </Border>
+        </DockPanel>
         
-        <Border Height="25" Background="SkyBlue" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top">
-            <TextBlock Foreground="Black">Quick Commands</TextBlock>
-        </Border>
+        <Separator Margin="0"
+            DockPanel.Dock="Top">
+        </Separator>
         
-        <Border Height="25" Background="LemonChiffon" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Bottom">
-            <TextBlock Foreground="Black">Status Indicators</TextBlock>
-        </Border>
+        <DockPanel
+            Dock="Top">
+                <Button>
+                    Build
+                </Button>
+                <Button>
+                    Launch
+                </Button>
+                <Button>
+                    Launch Set
+                </Button>
+        </DockPanel>
         
-        <Border Width="200" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Left">
-            <DockPanel Margin="10">
-                <!-- 仅新增：一个按钮 -->
-                <Button DockPanel.Dock="Top" Content="选择文件夹"
-                        HorizontalAlignment="Left" Margin="0 0 0 10"
-                        Command="{Binding SearchFolder}"/>
-
-                <!-- 原文一模一样的 TreeView -->
-                <TreeView ItemsSource="{Binding FolderItems}">
-                    <TreeView.ItemTemplate>
-                        <TreeDataTemplate ItemsSource="{Binding Children}"
-                                          x:DataType="models:DirectoryTreeNode">
-                            <WrapPanel>
-                                <TextBlock Text="{Binding NodeName}"/>
-                                <TextBlock>[子目录:</TextBlock>
-                                <TextBlock Text="{Binding FolderNum}"/>
-                                <TextBlock>,文件:</TextBlock>
-                                <TextBlock Text="{Binding FileNum}"/>
-                                <TextBlock>]</TextBlock>
-                            </WrapPanel>
-                        </TreeDataTemplate>
-                    </TreeView.ItemTemplate>
-                </TreeView>
-            </DockPanel>
-        </Border>
+        <Separator Margin="0"
+                   DockPanel.Dock="Top">
+        </Separator>
         
-        <Border Background="White" BorderBrush="Black" BorderThickness="1">
-        </Border>
+        <DockPanel
+            Background="LimeGreen"
+            Dock="Bottom">
+            <TextBlock Foreground="Black">ROS Status Indicators</TextBlock>
+        </DockPanel>
+        <DockPanel 
+            Dock="Left"
+            Width="200">
+            
+            <TreeView ItemsSource="{Binding FolderItems}">
+                <TreeView.ItemTemplate>
+                    <TreeDataTemplate ItemsSource="{Binding Children}"
+                                      x:DataType="models:DirectoryTreeNode">
+                        <WrapPanel>
+                            <TextBlock Text="{Binding NodeName}"/>
+                            <TextBlock>[子目录:</TextBlock>
+                            <TextBlock Text="{Binding FolderNum}"/>
+                            <TextBlock>,文件:</TextBlock>
+                            <TextBlock Text="{Binding FileNum}"/>
+                            <TextBlock>]</TextBlock>
+                        </WrapPanel>
+                    </TreeDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </DockPanel>
+        
+        <AvaloniaEdit:TextEditor Text="Code Editor"
+                                 ShowLineNumbers="True"
+                                 FontFamily="Cascadia Code,Consolas,Menlo,Monospace"/>
     </DockPanel>
 </Window>
